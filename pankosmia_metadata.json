@@ -1,0 +1,18 @@
+{
+  "id": "ensemble-workspace",
+  "require": {
+    "net": false,
+    "debug": false
+  },
+  "minServerVersion": "0.21.2",
+  "i18n": {
+    "title": {
+      "en": "workspace",
+      "fr": "Espace de travail"
+    },
+    "summary": {
+      "en": "Edit content through this page.",
+      "fr": "Éditer du contenu via cette page."
+    }
+  }
+}

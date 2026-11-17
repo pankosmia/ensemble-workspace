@@ -1,22 +1,25 @@
 import {
-  AdvancedAppBar, i18nContext, currentProjectContext, bcvContext,
+  AdvancedAppBar,
+  i18nContext,
+  currentProjectContext,
+  bcvContext,
   debugContext,
 } from "pankosmia-rcl";
-import PanWorkspaceManager from "./PanWorkspaceManager";
-import { JuxtaNavigation, useJuxtaNavigationContext } from "pankosmia-juxta-muncher";
+import PanWorkspaceManager from "../layout/PanWorkspaceManager";
+import {
+  JuxtaNavigation,
+  useJuxtaNavigationContext,
+} from "pankosmia-juxta-muncher";
 import { useContext, useState, useEffect } from "react";
 import { getJson } from "pankosmia-lib/http";
 import { enqueueSnackbar } from "notistack";
 import { doI18n } from "pankosmia-lib/i18n";
 function App() {
   const { bcvRef } = useContext(bcvContext);
-  console.log("🚀 ~ AppLayout ~ bcvRef:", bcvRef)
   const { debugRef } = useContext(debugContext);
   const { i18nRef } = useContext(i18nContext);
-  const {currentProjectRef } = useContext(currentProjectContext);
-  console.log("🚀 ~ AppLayout ~ currentProjectRef:", currentProjectRef)
+  const { currentProjectRef } = useContext(currentProjectContext);
   const [currentBurrito, setCurrentBurrito] = useState(null);
-  console.log("🚀 ~ AppLayout ~ currentBurrito:", currentBurrito)
   const navigation = useJuxtaNavigationContext();
   const [modified, setModified] = useState(false);
 
@@ -46,24 +49,27 @@ function App() {
     local_path: currentBurrito[0],
     ...currentBurrito[1],
   };
-  return <>
-    <AdvancedAppBar
-      navigation={
-        metadata && (
-          <JuxtaNavigation
-            metadata={metadata}
-            modified={modified}
-            {...navigation}
-            bcvRef={bcvRef}
-            debugRef={debugRef}
-            i18nRef={i18nRef}
-            currentProjectRef={currentProjectRef}
-          />
-        )
-      }
-    />
-    <PanWorkspaceManager />;
-  </>
+  console.log(navigation);
+  return (
+    <>
+      <AdvancedAppBar
+        navigation={
+          metadata && (
+            <JuxtaNavigation
+              metadata={metadata}
+              modified={modified}
+              {...navigation}
+              bcvRef={bcvRef}
+              debugRef={debugRef}
+              i18nRef={i18nRef}
+              currentProjectRef={currentProjectRef}
+            />
+          )
+        }
+      />
+      <PanWorkspaceManager setModified={setModified} modified={modified} />;
+    </>
+  );
 }
 
 export default App;

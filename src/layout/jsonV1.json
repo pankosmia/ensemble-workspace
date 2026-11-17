@@ -1,53 +1,28 @@
 {
   "layout": {
     "init": "horizontal",
-    "order": [null, "vertical"],
-    "zoneId": [[0], [1, 2]],
+    "order": [null, "null"],
+    "zoneId": [[0], [1]],
     "editor": 0
   },
   "zones": [
     {
-      "id": 1,
+      "id": 0,
       "tiles": [
         {
           "id": 1,
           "name": "Tile 1",
-          "src": "_local_/_sideloaded_/machin_chouette"
+          "src": "_local_/_local_/fr_juxta"
         }
       ]
     },
     {
-      "id": 2,
+      "id": 1,
       "tiles": [
         {
           "id": 2,
           "name": "Tile 2",
-          "src": "_local_/_sideloaded_/machin_chouette"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "tiles": [
-        {
-          "id": 3,
-          "name": "Tile 3",
-          "src": "_local_/_sideloaded_/machin_chouette"
-        },
-         {
-          "id": 4,
-          "name": "Tile 4",
-          "src": "_local_/_sideloaded_/machin_chouette"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "tiles": [
-        {
-          "id": 4,
-          "name": "Tile 4",
-          "src": "_local_/_sideloaded_/machin_chouette"
+          "src": "_local_/_local_/fr_juxta"
         }
       ]
     }

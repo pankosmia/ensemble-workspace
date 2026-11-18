@@ -6,13 +6,17 @@ import {
   debugContext,
 } from "pankosmia-rcl";
 import PanWorkspaceManager from "../layout/PanWorkspaceManager";
+import config from "../layout/jsonV1.json";
+
 import {
   JuxtaNavigation,
   useJuxtaNavigationContext,
 } from "pankosmia-juxta-muncher";
+
 import { useContext, useState, useEffect } from "react";
-import { getJson } from "pankosmia-lib/http";
+import { getJson, postEmpty } from "pankosmia-lib/http";
 import { enqueueSnackbar } from "notistack";
+
 import { doI18n } from "pankosmia-lib/i18n";
 function App() {
   const { bcvRef } = useContext(bcvContext);
@@ -49,7 +53,16 @@ function App() {
     local_path: currentBurrito[0],
     ...currentBurrito[1],
   };
-  console.log(navigation);
+
+  //setCurrentProject
+  useEffect(() => {
+    async function setCurrentProject() {
+      const src = config.zones[config.layout.editor].tiles[0].src;
+      await postEmpty(`/api/app-state/current-project/${src}`);
+    }
+    setCurrentProject();
+  }, []);
+
   return (
     <>
       <AdvancedAppBar

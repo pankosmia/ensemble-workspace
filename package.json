@@ -18,6 +18,7 @@
     "pankosmia-juxta-muncher": "^0.2.19",
     "pankosmia-lib": "^0.0.5",
     "pankosmia-rcl": "0.8.9",
+    "pankosmia-text_translation-muncher": "0.2.7",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-resizable-panels": "^4.23.0"
@@ -29,7 +30,7 @@
     "vite": "^6.0.7"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
+    "react": "19.0.0",
     "react-dom": "^19.0.0"
   },
   "scripts": {

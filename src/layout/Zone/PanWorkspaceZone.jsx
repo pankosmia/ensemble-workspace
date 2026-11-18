@@ -8,12 +8,8 @@ import {
   debugContext,
   i18nContext,
   currentProjectContext,
+  productContext,
 } from "pankosmia-rcl";
-import {
-  JuxtalinearViewerMuncher,
-  useJuxtaNavigationContext,
-  JuxtaDraftingEditor,
-} from "pankosmia-juxta-muncher";
 
 export default function PanWorkspaceZone({
   zone,
@@ -28,15 +24,15 @@ export default function PanWorkspaceZone({
   const { debugRef } = useContext(debugContext);
   const { i18nRef } = useContext(i18nContext);
   const { currentProjectRef } = useContext(currentProjectContext);
+  const { product } = useContext(productContext);
+
   const metadata = {
     ...summaries[zone.tiles[0].src],
     local_path: zone.tiles[0].src,
   };
   const [tileUi, setTileUi] = useState(null);
-  const navigation = useJuxtaNavigationContext();
 
-  console.log(summaries);
-  console.log(zone, zoneID);
+  console.log(metadata);
   useEffect(() => {
     async function test() {
       let { tiles } = zone;
@@ -81,30 +77,18 @@ export default function PanWorkspaceZone({
               <Separator key={`sep-${tile.id}`} style={{ width: 4 }} />
             ),
             <Panel minSize={30} key={tile.id} id={tile.id}>
-              {layout.editor === zoneID ? (
-                <JuxtaDraftingEditor
-                  key={metadata.local_path}
-                  modified={modified}
+              {currentProjectRef.current && (
+                <PanWorkspaceTile
+                  product={product}
                   setModified={setModified}
-                  navigation={navigation}
                   metadata={metadata}
                   bcvRef={bcvRef}
                   debugRef={debugRef}
                   i18nRef={i18nRef}
                   currentProjectRef={currentProjectRef}
-                  navigationEnable={false}
-                />
-              ) : (
-                <JuxtalinearViewerMuncher
-                  metadata={metadata}
-                  bcvRef={bcvRef}
-                  debugRef={debugRef}
-                  i18nRef={i18nRef}
-                  currentProjectRef={currentProjectRef}
+                  isEditor={layout.editor === zoneID}
                 />
               )}
-
-              {/* <PanWorkspaceTile index={tile.id} removeTile={removeTile} /> */}
             </Panel>,
           ])}
       </Group>

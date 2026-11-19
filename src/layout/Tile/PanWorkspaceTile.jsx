@@ -12,7 +12,6 @@ export default function PanWorkspaceTile({
   product,
   isEditor,
 }) {
-  console.log("ici", metadata, isEditor);
   return isEditor ? (
     <PanWorkspaceTileEditor
       modified={modified}

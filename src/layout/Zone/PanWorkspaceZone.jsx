@@ -32,7 +32,6 @@ export default function PanWorkspaceZone({
   };
   const [tileUi, setTileUi] = useState(null);
 
-  console.log(metadata);
   useEffect(() => {
     async function test() {
       let { tiles } = zone;

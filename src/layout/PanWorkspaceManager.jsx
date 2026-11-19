@@ -178,7 +178,6 @@ export default function PanWorkspaceManager({ setModified, modified }) {
       const fullMetadataResponse = await getJson(
         `/api/burrito/metadata/summaries`,
       );
-      console.log(fullMetadataResponse);
       if (fullMetadataResponse.ok) {
         setMetadataSummaries(fullMetadataResponse.json);
       } else {

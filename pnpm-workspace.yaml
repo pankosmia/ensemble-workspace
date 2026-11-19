@@ -1,4 +1,5 @@
 allowBuilds:
+  core-js-pure: true
   esbuild: true
 minimumReleaseAgeExclude:
   - pankosmia-rcl@0.4.18 || 0.4.19 || 0.4.22 || 0.7.8 || 0.8.5 || 0.8.9

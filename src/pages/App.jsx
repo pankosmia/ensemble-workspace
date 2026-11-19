@@ -1,24 +1,18 @@
-import {
-  AdvancedAppBar, i18nContext, currentProjectContext, bcvContext,
-  debugContext,
-} from "pankosmia-rcl";
-import PanWorkspaceManager from "./PanWorkspaceManager";
-import { JuxtaNavigation, useJuxtaNavigationContext } from "pankosmia-juxta-muncher";
+import { AdvancedAppBar, currentProjectContext } from "pankosmia-rcl";
+import PanWorkspaceManager from "../layout/PanWorkspaceManager";
+import config from "../layout/jsonV1.json";
+
 import { useContext, useState, useEffect } from "react";
-import { getJson } from "pankosmia-lib/http";
+import { getJson, postEmpty } from "pankosmia-lib/http";
 import { enqueueSnackbar } from "notistack";
+
 import { doI18n } from "pankosmia-lib/i18n";
+import NavigationWrapper from "../layout/Navigation/NavigationWrapper";
+import { Box } from "@mui/system";
 function App() {
-  const { bcvRef } = useContext(bcvContext);
-  console.log("🚀 ~ AppLayout ~ bcvRef:", bcvRef)
-  const { debugRef } = useContext(debugContext);
-  const { i18nRef } = useContext(i18nContext);
-  const {currentProjectRef } = useContext(currentProjectContext);
-  console.log("🚀 ~ AppLayout ~ currentProjectRef:", currentProjectRef)
   const [currentBurrito, setCurrentBurrito] = useState(null);
-  console.log("🚀 ~ AppLayout ~ currentBurrito:", currentBurrito)
-  const navigation = useJuxtaNavigationContext();
   const [modified, setModified] = useState(false);
+  const { currentProjectRef } = useContext(currentProjectContext);
 
   useEffect(() => {
     async function getSummary() {
@@ -46,24 +40,30 @@ function App() {
     local_path: currentBurrito[0],
     ...currentBurrito[1],
   };
-  return <>
-    <AdvancedAppBar
-      navigation={
-        metadata && (
-          <JuxtaNavigation
-            metadata={metadata}
-            modified={modified}
-            {...navigation}
-            bcvRef={bcvRef}
-            debugRef={debugRef}
-            i18nRef={i18nRef}
-            currentProjectRef={currentProjectRef}
-          />
-        )
-      }
-    />
-    <PanWorkspaceManager />;
-  </>
+
+  //setCurrentProject
+  useEffect(() => {
+    async function setCurrentProject() {
+      const src = config.zones[config.layout.editor].tiles[0].src;
+      await postEmpty(`/api/app-state/current-project/${src}`);
+    }
+    setCurrentProject();
+  }, []);
+
+  return (
+    <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+      <AdvancedAppBar
+        navigation={
+          metadata && (
+            <NavigationWrapper metadata={metadata} modified={modified} />
+          )
+        }
+      />
+      <Box sx={{ flex: 1, minHeight: 0 }}>
+        <PanWorkspaceManager setModified={setModified} modified={modified} />
+      </Box>
+    </Box>
+  );
 }
 
 export default App;

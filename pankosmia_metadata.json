@@ -2,7 +2,8 @@
   "id": "ensemble-workspace",
   "require": {
     "net": false,
-    "debug": false
+    "debug": false,
+    "beta": true
   },
   "minServerVersion": "0.21.2",
   "i18n": {

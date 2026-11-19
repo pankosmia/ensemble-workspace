@@ -57,7 +57,7 @@ export default function PanWorkspaceZone({
   }
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "100%", width: "100%" }}>
       {/* <div
         style={{
           gap: "8px",
@@ -70,7 +70,7 @@ export default function PanWorkspaceZone({
         <button onClick={() => onRemoveZone(id)}>✕ Zone</button>
         <button onClick={() => addTile()}>+ Tile</button>
       </div> */}
-      <Group style={{ height: `100%` }}>
+      <Group style={{ height: "100%", width: "100%" }}>
         {tileUi &&
           tileUi.flatMap((tile, index) => [
             index > 0 && (
@@ -78,16 +78,18 @@ export default function PanWorkspaceZone({
             ),
             <Panel minSize={30} key={tile.id} id={tile.id}>
               {currentProjectRef.current && (
-                <PanWorkspaceTile
-                  product={product}
-                  setModified={setModified}
-                  metadata={metadata}
-                  bcvRef={bcvRef}
-                  debugRef={debugRef}
-                  i18nRef={i18nRef}
-                  currentProjectRef={currentProjectRef}
-                  isEditor={layout.editor === zoneID}
-                />
+                <div style={{ height: "100%", width: "100%" }}>
+                  <PanWorkspaceTile
+                    product={product}
+                    setModified={setModified}
+                    metadata={metadata}
+                    bcvRef={bcvRef}
+                    debugRef={debugRef}
+                    i18nRef={i18nRef}
+                    currentProjectRef={currentProjectRef}
+                    isEditor={layout.editor === zoneID}
+                  />
+                </div>
               )}
             </Panel>,
           ])}

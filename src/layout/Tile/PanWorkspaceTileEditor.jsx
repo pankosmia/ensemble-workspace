@@ -7,6 +7,7 @@ import { TextTranslationEditorMuncher } from "pankosmia-text_translation-muncher
 import { useContext } from "react";
 
 import { typographyContext, bcvContext } from "pankosmia-rcl";
+import { Box } from "@mui/system";
 export default function PanWorkspaceTileEditor({
   modified,
   setModified,
@@ -22,7 +23,7 @@ export default function PanWorkspaceTileEditor({
   const navigation = useJuxtaNavigationContext();
 
   if (metadata) {
-    if (metadata.flavor.toLowerCase() === "textTranslation") {
+    if (metadata.flavor === "textTranslation") {
       return (
         <TextTranslationEditorMuncher
           metadata={metadata}
@@ -33,23 +34,26 @@ export default function PanWorkspaceTileEditor({
           typographyRef={typographyRef}
           currentProjectRef={currentProjectRef}
           bcvRef={bcvRef}
+          navigation={false}
         />
       );
     }
     if (metadata.flavor.toLowerCase() === "x-juxtalinear") {
       return (
-        <JuxtaDraftingEditor
-          key={metadata.local_path}
-          modified={modified}
-          setModified={setModified}
-          navigation={navigation}
-          metadata={metadata}
-          bcvRef={bcvRef}
-          debugRef={debugRef}
-          i18nRef={i18nRef}
-          currentProjectRef={currentProjectRef}
-          navigationEnable={false}
-        />
+        <Box sx={{ paddingTop: 2, paddingBottom: 2 }}>
+          <JuxtaDraftingEditor
+            key={metadata.local_path}
+            modified={modified}
+            setModified={setModified}
+            navigation={navigation}
+            metadata={metadata}
+            bcvRef={bcvRef}
+            debugRef={debugRef}
+            i18nRef={i18nRef}
+            currentProjectRef={currentProjectRef}
+            navigationEnable={false}
+          />
+        </Box>
       );
     }
   }

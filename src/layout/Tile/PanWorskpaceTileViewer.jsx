@@ -1,7 +1,8 @@
 import { JuxtalinearViewerMuncher } from "pankosmia-juxta-muncher";
-import { snippetContext, wordContext, bcvContext } from "pankosmia-rcl";
 import { TextTranslationViewerMuncher } from "pankosmia-text_translation-muncher";
 import { useContext } from "react";
+import { snippetContext, wordContext, bcvContext } from "pankosmia-rcl";
+import { Box } from "@mui/system";
 
 export default function PanWorkspaceTileViewer({
   metadata,
@@ -17,14 +18,16 @@ export default function PanWorkspaceTileViewer({
   if (metadata) {
     if (metadata.flavor === "textTranslation") {
       return (
-        <TextTranslationViewerMuncher
-          metadata={metadata}
-          debugRef={debugRef}
-          systemBcv={systemBcv}
-          i18nRef={i18nRef}
-          snippet={snippet}
-          word={word}
-        />
+        <Box sx={{ paddingTop: 2, paddingBottom: 2 }}>
+          <TextTranslationViewerMuncher
+            metadata={metadata}
+            debugRef={debugRef}
+            systemBcv={systemBcv}
+            i18nRef={i18nRef}
+            snippet={snippet}
+            word={word}
+          />
+        </Box>
       );
     }
     if (metadata.flavor.toLowerCase() === "x-juxtalinear") {

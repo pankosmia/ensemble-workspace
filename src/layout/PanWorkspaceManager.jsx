@@ -189,18 +189,11 @@ export default function PanWorkspaceManager({ setModified, modified }) {
   }, []);
   return (
     metadataSummaries && (
-      <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-        {/* <div>
-        <button style={{ margin: "8px" }} onClick={addZone}>
-          + Zone
-        </button>
-        <button onClick={() => rotaterLeft()}>{`<-- rotation`}</button>
-        <button onClick={() => rotateRight()}>{`rotation -->`}</button>\
-        <button onClick={() => flipH()}>{`flip horizontal`}</button>
-        <button onClick={() => flipV()}>{`flip vertical`}</button>
-      </div> */}
-
-        <Group style={{ height: "100%" }} orientation={initLayout}>
+      <div style={{ height: "100%", width: "100%" }}>
+        <Group
+          style={{ height: "100%", width: "100%" }}
+          orientation={initLayout}
+        >
           {layoutZoneId.map((arrayIds, idArr) => {
             if (arrayIds.length > 1) {
               let posibleSeparator;

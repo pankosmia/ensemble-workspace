@@ -1,7 +1,7 @@
-import { AdvancedAppBar, currentProjectContext } from "pankosmia-rcl";
+import { currentProjectContext } from "pankosmia-rcl";
 import PanWorkspaceManager from "../layout/PanWorkspaceManager";
 import config from "../layout/jsonV1.json";
-
+import AdvancedAppBar from "../layout/Navigation/AdvancedAppBar";
 import { useContext, useState, useEffect } from "react";
 import { getJson, postEmpty } from "pankosmia-lib/http";
 import { enqueueSnackbar } from "notistack";

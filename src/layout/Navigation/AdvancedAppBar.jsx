@@ -94,7 +94,10 @@ export default function AdvancedAppBar({ navigation }) {
       await postEmpty("/api/net/enable", debugRef.current);
     } catch (e) {
       console.error(
-        doI18n("library:pankosmia-rcl:internet_enable_error", i18nRef.current),
+        doI18n(
+          "pages:ensemble-workspace:internet_enable_error",
+          i18nRef.current,
+        ),
         e,
       );
       return;

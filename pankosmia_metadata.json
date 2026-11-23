@@ -14,6 +14,10 @@
     "summary": {
       "en": "Edit content through this page.",
       "fr": "Éditer du contenu via cette page."
+    },
+    "internet_enable_error": {
+      "en": "Error enabling internet.",
+      "fr": "Erreur lors de l'activation d'internet."
     }
   }
 }

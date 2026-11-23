@@ -18,7 +18,7 @@
     "pankosmia-juxta-muncher": "^0.2.19",
     "pankosmia-lib": "^0.0.5",
     "pankosmia-rcl": "0.8.13",
-    "pankosmia-text_translation-muncher": "0.2.8",
+    "pankosmia-text_translation-muncher": "0.2.11",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-markdown": "^9.1.0",

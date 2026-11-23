@@ -32,7 +32,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
 import { postEmpty, getJson } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
-
+import PanDialogInternetRequired from "./DialogInternet";
 export default function AdvancedAppBar({ navigation }) {
   const theme = useTheme();
   const [menuLayout, setMenuLayout] = useState(null);
@@ -41,13 +41,13 @@ export default function AdvancedAppBar({ navigation }) {
   const [menuOpenMoreVert, setMenuOpenMoreVert] = useState(false);
   const [nameProduct, setNameProduct] = useState("");
   const [listClients, setListClients] = useState([]);
-  const [clientConfig, setClientConfig] = useState(null);
-  console.log("🚀 ~ AdvancedAppBar ~ clientConfig:", clientConfig);
   const { enabledRef } = useContext(netContext);
   const { debugRef } = useContext(debugContext);
   const { betaRef } = useContext(betaContext);
   const { i18nRef } = useContext(i18nContext);
   const [internetDialogOpen, setInternetDialogOpen] = useState(false);
+  const [internetRequired, setInternetRequired] = useState(false);
+  const [firefoxInstalled, setFirefoxInstalled] = useState(false);
   const downsm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const OpenMenuMoreVert = (event) => {
@@ -78,12 +78,6 @@ export default function AdvancedAppBar({ navigation }) {
       .then((data) => setListClients(data))
       .catch((err) => console.error("Error :", err));
   }, []);
-  useEffect(() => {
-    getJson("/api/client-config")
-      .then((res) => res.json)
-      .then((data) => setClientConfig(data))
-      .catch((err) => console.error("Error :", err));
-  }, []);
   const goToClient = (clientId) => {
     const client = listClients.find((c) => c.id === clientId);
     if (client) {
@@ -91,6 +85,23 @@ export default function AdvancedAppBar({ navigation }) {
       window.location.href = client.url;
     }
   };
+  useEffect(() => {
+    window.electronAPI.checkFirefoxInstalled().then(setFirefoxInstalled);
+  }, []);
+
+  const handlePdfPublisherClick = async () => {
+    try {
+      await postEmpty("/api/net/enable", debugRef.current);
+    } catch (e) {
+      console.error(
+        doI18n("library:pankosmia-rcl:internet_enable_error", i18nRef.current),
+        e,
+      );
+      return;
+    }
+    goToClient("core-client_pdf_publisher");
+  };
+
   return (
     <WrapperAppBar>
       {navigation}
@@ -181,13 +192,35 @@ export default function AdvancedAppBar({ navigation }) {
           {listClients.some(
             (client) => client.id === "core-client_pdf_publisher",
           ) && (
-            <MenuItem onClick={() => goToClient("core-client_pdf_publisher")}>
-              <ListItemIcon>{<PictureAsPdfOutlinedIcon />}</ListItemIcon>
-              <ListItemText>
-                {doI18n("library:pankosmia-rcl:pdf_publisher", i18nRef.current)}
-              </ListItemText>
-            </MenuItem>
+            <>
+              <MenuItem
+                onClick={() => {
+                  if (!firefoxInstalled && !enabledRef.current) {
+                    setInternetRequired(true);
+                  } else {
+                    goToClient("core-client_pdf_publisher");
+                  }
+                }}
+              >
+                <ListItemIcon>
+                  <PictureAsPdfOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  {doI18n(
+                    "library:pankosmia-rcl:pdf_publisher",
+                    i18nRef.current,
+                  )}
+                </ListItemText>
+              </MenuItem>
+              <PanDialogInternetRequired
+                internetRequired={internetRequired}
+                setInternetRequired={setInternetRequired}
+                ActionButton={handlePdfPublisherClick}
+                nameProduct={nameProduct}
+              />
+            </>
           )}
+
           {listClients.some((client) => client.id === "content") && (
             <MenuItem onClick={() => goToClient("content")}>
               <ListItemIcon>{<LibraryBooksOutlinedIcon />}</ListItemIcon>

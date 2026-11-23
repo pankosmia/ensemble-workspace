@@ -35,8 +35,8 @@ importers:
         specifier: 0.8.13
         version: 0.8.13(d22a3c50405326e10bda3aa859cf6f28)
       pankosmia-text_translation-muncher:
-        specifier: 0.2.8
-        version: 0.2.8(5a75a54f9f0ef806c6a8ef720521bf5d)
+        specifier: 0.2.11
+        version: 0.2.11(5a75a54f9f0ef806c6a8ef720521bf5d)
       react:
         specifier: ^19.2.8
         version: 19.3.1
@@ -4724,10 +4724,10 @@ packages:
       react: ^19.2.8
       react-dom: ^19.2.8
 
-  pankosmia-text_translation-muncher@0.2.8:
+  pankosmia-text_translation-muncher@0.2.11:
     resolution:
       {
-        integrity: sha512-Z4d1feiHR0RpXfg4DKlbFYSkCbdNNMQSCZDZjp92+N5AXcVfGMpR1Oa1qqBuQkgziGarWmFw0DICJNawUwDDTw==,
+        integrity: sha512-AYBsq0LwWenlsz7kmPTn3YJDJHyQt3aRLVoIvoSZPZjQD5CIkCeo/nFEvEWcJKRziT76/b5VRZjareNNX44N/A==,
       }
     peerDependencies:
       "@emotion/react": 11.14.0
@@ -9298,7 +9298,7 @@ snapshots:
       - supports-color
       - typescript
 
-  pankosmia-text_translation-muncher@0.2.8(5a75a54f9f0ef806c6a8ef720521bf5d):
+  pankosmia-text_translation-muncher@0.2.11(5a75a54f9f0ef806c6a8ef720521bf5d):
     dependencies:
       "@emotion/react": 11.14.0(@types/react@19.3.0)(react@19.3.1)(supports-color@7.2.0)
       "@emotion/styled": 11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.1)(supports-color@7.2.0))(@types/react@19.3.0)(react@19.3.1)(supports-color@7.2.0)

@@ -41,10 +41,11 @@ export default function AdvancedAppBar({ navigation }) {
   const [menuOpenMoreVert, setMenuOpenMoreVert] = useState(false);
   const [nameProduct, setNameProduct] = useState("");
   const [listClients, setListClients] = useState([]);
+  const [clientConfig, setClientConfig] = useState(null);
+  console.log("🚀 ~ AdvancedAppBar ~ clientConfig:", clientConfig);
   const { enabledRef } = useContext(netContext);
   const { debugRef } = useContext(debugContext);
   const { betaRef } = useContext(betaContext);
-  console.log("🚀 ~ AdvancedAppBar ~ betaRef:", betaRef);
   const { i18nRef } = useContext(i18nContext);
   const [internetDialogOpen, setInternetDialogOpen] = useState(false);
   const downsm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -75,6 +76,12 @@ export default function AdvancedAppBar({ navigation }) {
     getJson("/api/list-clients")
       .then((res) => res.json)
       .then((data) => setListClients(data))
+      .catch((err) => console.error("Error :", err));
+  }, []);
+  useEffect(() => {
+    getJson("/api/client-config")
+      .then((res) => res.json)
+      .then((data) => setClientConfig(data))
       .catch((err) => console.error("Error :", err));
   }, []);
   const goToClient = (clientId) => {

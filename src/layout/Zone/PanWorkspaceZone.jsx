@@ -3,6 +3,8 @@ import PanWorkspaceTile from "../Tile/PanWorkspaceTile";
 import { Separator } from "react-resizable-panels";
 import { Panel } from "react-resizable-panels";
 import { useEffect, useState, useContext } from "react";
+import ToolbarResourceNotSelected from "../Toolbar/ToolbarResourceNotSelected";
+import ToolbarResourceSelected from "../Toolbar/ToolbarResourceSelected";
 import {
   bcvContext,
   debugContext,
@@ -10,6 +12,7 @@ import {
   currentProjectContext,
   productContext,
 } from "pankosmia-rcl";
+import { Toolbar } from "@mui/material";
 
 export default function PanWorkspaceZone({
   zone,
@@ -57,18 +60,7 @@ export default function PanWorkspaceZone({
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
-      {/* <div
-        style={{
-          gap: "8px",
-          display: "flex",
-          margin: "8px",
-          alignItems: "center",
-        }}
-      >
-        Zone {id}
-        <button onClick={() => onRemoveZone(id)}>✕ Zone</button>
-        <button onClick={() => addTile()}>+ Tile</button>
-      </div> */}
+      <ToolbarResourceSelected />
       <Group style={{ height: "100%", width: "100%" }}>
         {tileUi &&
           tileUi.flatMap((tile, index) => [

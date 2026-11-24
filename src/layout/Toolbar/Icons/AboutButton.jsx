@@ -1,0 +1,22 @@
+import { IconButton, Tooltip } from "@mui/material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { doI18n } from "pankosmia-lib/i18n";
+import { i18nContext } from "pankosmia-rcl";
+import { useContext } from "react";
+export default function AboutButton() {
+  const { i18nRef } = useContext(i18nContext);
+  return (
+    <Tooltip
+      title={doI18n("pages:ensemble-workspace:about_button", i18nRef.current)}
+    >
+      <IconButton
+        sx={{
+          padding: "4px",
+          borderRadius: "4px",
+        }}
+      >
+        <InfoOutlinedIcon />
+      </IconButton>
+    </Tooltip>
+  );
+}

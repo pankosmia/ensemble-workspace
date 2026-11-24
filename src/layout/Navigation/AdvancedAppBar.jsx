@@ -49,6 +49,7 @@ export default function AdvancedAppBar({ navigation }) {
   const [internetRequired, setInternetRequired] = useState(false);
   const [firefoxInstalled, setFirefoxInstalled] = useState(false);
   const downsm = useMediaQuery(theme.breakpoints.down("sm"));
+  const isElectron = !!window.electronAPI;
 
   const OpenMenuMoreVert = (event) => {
     setMenuOpenMoreVert(true);
@@ -86,6 +87,7 @@ export default function AdvancedAppBar({ navigation }) {
     }
   };
   useEffect(() => {
+    if (!isElectron) return;
     window.electronAPI.checkFirefoxInstalled().then(setFirefoxInstalled);
   }, []);
 

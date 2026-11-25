@@ -12,7 +12,6 @@ import {
   currentProjectContext,
   productContext,
 } from "pankosmia-rcl";
-import { Toolbar } from "@mui/material";
 
 export default function PanWorkspaceZone({
   zone,
@@ -31,11 +30,8 @@ export default function PanWorkspaceZone({
   const { currentProjectRef } = useContext(currentProjectContext);
   const { product } = useContext(productContext);
 
-  const metadata = {
-    ...summaries[zone.tiles[0].src],
-    local_path: zone.tiles[0].src,
-  };
   const [tileUi, setTileUi] = useState(null);
+  const [activeTileId, setActiveTileId] = useState(zone.tiles[0].id);
 
   useEffect(() => {
     async function test() {
@@ -65,16 +61,11 @@ export default function PanWorkspaceZone({
       style={{
         height: "100%",
         width: "100%",
-        outline: activeZoneId === zoneID ? "2px solid #1976d2" : "none",
+        overflow: "hidden",
         outlineOffset: -2,
       }}
       onPointerDownCapture={() => setActiveZoneId(zoneID)}
     >
-      {activeZoneId === zoneID ? (
-        <ToolbarResourceSelected active />
-      ) : (
-        <ToolbarResourceNotSelected />
-      )}
       <Group style={{ height: "100%", width: "100%" }}>
         {tileUi &&
           tileUi.flatMap((tile, index) => [
@@ -83,17 +74,35 @@ export default function PanWorkspaceZone({
             ),
             <Panel minSize={30} key={tile.id} id={tile.id}>
               {currentProjectRef.current && (
-                <div style={{ height: "100%", width: "100%" }}>
-                  <PanWorkspaceTile
-                    product={product}
-                    setModified={setModified}
-                    metadata={metadata}
-                    bcvRef={bcvRef}
-                    debugRef={debugRef}
-                    i18nRef={i18nRef}
-                    currentProjectRef={currentProjectRef}
-                    isEditor={layout.editor === zoneID}
-                  />
+                <div
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                  onPointerDownCapture={() => setActiveTileId(tile.id)}
+                >
+                  {activeZoneId === zoneID && activeTileId === tile.id ? (
+                    <ToolbarResourceSelected active title="Pain sur les eaux" />
+                  ) : (
+                    <ToolbarResourceNotSelected />
+                  )}
+                  <div style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
+                    <PanWorkspaceTile
+                      product={product}
+                      setModified={setModified}
+                      metadata={{
+                        ...summaries[tile.src],
+                        local_path: tile.src,
+                      }}
+                      bcvRef={bcvRef}
+                      debugRef={debugRef}
+                      i18nRef={i18nRef}
+                      currentProjectRef={currentProjectRef}
+                      isEditor={layout.editor === zoneID}
+                    />
+                  </div>
                 </div>
               )}
             </Panel>,

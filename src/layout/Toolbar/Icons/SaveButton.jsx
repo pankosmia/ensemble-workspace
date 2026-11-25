@@ -2,7 +2,7 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { Badge, IconButton, Tooltip, Typography } from "@mui/material";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext } from "pankosmia-rcl";
-import { useContext } from "react";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 
 function SaveButton() {
   const { i18nRef } = useContext(i18nContext);
@@ -26,40 +26,45 @@ function SaveButton() {
 
 function SaveButtonError() {
   const { i18nRef } = useContext(i18nContext);
-  return (
-    <Typography
-      variant="caption"
-      sx={{
-        px: 1,
-        borderRadius: "4px",
-        bgcolor: "#FDEDED",
-        color: "text.primary",
-        display: "flex",
-        alignItems: "center",
-        gap: "4px",
-        minWidth: 0,
-        "& svg": {
-          width: "20px",
-          height: "20px",
-          flexShrink: 0,
-        },
-        "@container (max-width: 140px)": {
-          "& .save-error-label": { display: "none" },
-        },
-      }}
-    >
-      <SaveOutlinedIcon color="error" />
+  const chipRef = useRef(null);
+  const [iconOnly, setIconOnly] = useState(false);
+  const message = doI18n(
+    "pages:ensemble-workspace:unsaved_changes",
+    i18nRef.current,
+  );
 
-      <span
-        className="save-error-label"
-        style={{
-          minWidth: 0,
-          whiteSpace: "nowrap",
+  useLayoutEffect(() => {
+    const observer = new ResizeObserver(([entry]) => {
+      setIconOnly(entry.contentRect.width < 140);
+    });
+    observer.observe(chipRef.current.parentElement);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Tooltip title={iconOnly ? message : ""}>
+      <Typography
+        ref={chipRef}
+        variant="caption"
+        sx={{
+          px: 1,
+          borderRadius: "4px",
+          bgcolor: "#FDEDED",
+          color: "text.primary",
+          display: "flex",
+          alignItems: "center",
+          gap: "4px",
+          "& svg": {
+            width: "20px",
+            height: "20px",
+            flexShrink: 0,
+          },
         }}
       >
-        {doI18n("pages:ensemble-workspace:unsaved_changes", i18nRef.current)}
-      </span>
-    </Typography>
+        <SaveOutlinedIcon color="error" />
+        {!iconOnly && <span style={{ whiteSpace: "nowrap" }}>{message}</span>}
+      </Typography>
+    </Tooltip>
   );
 }
 export { SaveButton, SaveButtonError };

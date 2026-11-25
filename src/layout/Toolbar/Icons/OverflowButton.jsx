@@ -1,17 +1,18 @@
-import { Divider, IconButton, Popover, Stack, Tooltip } from "@mui/material";
+import { Box, IconButton, Popover, Stack, Tooltip } from "@mui/material";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext } from "pankosmia-rcl";
 import { useContext } from "react";
-import MoveButton from "./MoveButton";
-import DeleteButton from "./DeleteButton";
-import AboutButton from "./AboutButton";
 
-export default function OverflowButton({ overflowMenu, setOverflowMenu }) {
+export default function OverflowButton({
+  children,
+  overflowMenu,
+  setOverflowMenu,
+}) {
   const anchorEl = overflowMenu;
   const { i18nRef } = useContext(i18nContext);
   return (
-    <>
+    <Box sx={{ display: "contents" }}>
       <Tooltip
         title={doI18n(
           "pages:ensemble-workspace:overflow_button",
@@ -41,12 +42,9 @@ export default function OverflowButton({ overflowMenu, setOverflowMenu }) {
           spacing="2px"
           sx={{ p: 0.5 }}
         >
-          <MoveButton />
-          <DeleteButton />
-          <Divider orientation="vertical" flexItem sx={{ mx: 1, my: 0.5 }} />
-          <AboutButton />
+          {children}
         </Stack>
       </Popover>
-    </>
+    </Box>
   );
 }

@@ -38,39 +38,9 @@ function ToolbarGroup({ group, showDivider }) {
   );
 }
 
-const groups = [
-  {
-    divider: false,
-    width: 86,
-    nodes: [
-      <EditButton key="edit" />,
-      <ArrowMenu key="arrow" />,
-      <SaveButton key="save" />,
-    ],
-  },
-  {
-    divider: true,
-    width: 120,
-    nodes: [
-      <PrintButton key="print" />,
-      <ExportButton key="export" />,
-      <VersionManagerButton key="version" />,
-    ],
-  },
-  {
-    divider: true,
-    width: 86,
-    nodes: [<MoveButton key="move" />, <DeleteButton key="delete" />],
-  },
-  {
-    divider: true,
-    width: 52,
-    nodes: [<AboutButton key="about" />],
-  },
-];
 const overflow_witdh = 34;
 
-function countVisibleGroups(availableWidth) {
+function countVisibleGroups(groups, availableWidth) {
   let usedWidth = 0;
   for (let index = 0; index < groups.length; index++) {
     const group = groups[index];
@@ -89,14 +59,46 @@ function countVisibleGroups(availableWidth) {
 export default function ToolbarResourceSelected({ title, active }) {
   const theme = useTheme();
   const toolbarRef = useRef(null);
-  const [visibleCount, setVisibleCount] = useState(groups.length);
-  const [overflowMenu, setOverflowMenu] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(true);
+  const [overflowMenu, setOverflowMenu] = useState(false);
+
+  const groups = [
+    {
+      divider: false,
+      width: 86,
+      nodes: [
+        <EditButton key="edit" />,
+        <ArrowMenu key="arrow" />,
+        <SaveButton key="save" unsavedChanges={unsavedChanges} />,
+      ],
+    },
+    {
+      divider: true,
+      width: 120,
+      nodes: [
+        <PrintButton key="print" />,
+        <ExportButton key="export" />,
+        <VersionManagerButton key="version" />,
+      ],
+    },
+    {
+      divider: true,
+      width: 86,
+      nodes: [<MoveButton key="move" />, <DeleteButton key="delete" />],
+    },
+    {
+      divider: true,
+      width: 52,
+      nodes: [<AboutButton key="about" />],
+    },
+  ];
+
+  const [visibleCount, setVisibleCount] = useState(groups.length);
 
   useLayoutEffect(() => {
     if (!active || !toolbarRef.current) return;
     const observer = new ResizeObserver(([entry]) => {
-      setVisibleCount(countVisibleGroups(entry.contentRect.width));
+      setVisibleCount(countVisibleGroups(groups, entry.contentRect.width));
     });
     observer.observe(toolbarRef.current);
     return () => observer.disconnect();
@@ -126,7 +128,7 @@ export default function ToolbarResourceSelected({ title, active }) {
       >
         <Typography variant="caption">{title}</Typography>
       </Toolbar>
-      {!active && (
+      {active && (
         <Toolbar
           ref={toolbarRef}
           disableGutters
@@ -159,7 +161,7 @@ export default function ToolbarResourceSelected({ title, active }) {
           )}
         </Toolbar>
       )}
-      {active && unsavedChanges && (
+      {!active && unsavedChanges && (
         <Toolbar
           disableGutters
           sx={{

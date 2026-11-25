@@ -4,8 +4,9 @@ import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext } from "pankosmia-rcl";
 import { useContext, useLayoutEffect, useRef, useState } from "react";
 
-function SaveButton() {
+function SaveButton({ unsavedChanges }) {
   const { i18nRef } = useContext(i18nContext);
+
   return (
     <Tooltip
       title={doI18n("pages:ensemble-workspace:save_button", i18nRef.current)}
@@ -16,7 +17,7 @@ function SaveButton() {
           borderRadius: "4px",
         }}
       >
-        <Badge color="error" variant="dot">
+        <Badge invisible={!unsavedChanges} color="error" variant="dot">
           <SaveOutlinedIcon />
         </Badge>
       </IconButton>

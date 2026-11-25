@@ -50,6 +50,10 @@
     "overflow_button": {
       "en": "More",
       "fr": "Plus"
+    },
+    "unsaved_changes": {
+      "en": "Unsaved changes",
+      "fr": "Modifications non enregistrées"
     }
   }
 }

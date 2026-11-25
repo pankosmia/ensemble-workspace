@@ -22,6 +22,8 @@ export default function PanWorkspaceZone({
   onRemoveZone,
   setModified,
   modified,
+  activeZoneId,
+  setActiveZoneId,
 }) {
   const { bcvRef } = useContext(bcvContext);
   const { debugRef } = useContext(debugContext);
@@ -59,8 +61,20 @@ export default function PanWorkspaceZone({
   }
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <ToolbarResourceSelected />
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        outline: activeZoneId === zoneID ? "2px solid #1976d2" : "none",
+        outlineOffset: -2,
+      }}
+      onPointerDownCapture={() => setActiveZoneId(zoneID)}
+    >
+      {activeZoneId === zoneID ? (
+        <ToolbarResourceSelected active />
+      ) : (
+        <ToolbarResourceNotSelected />
+      )}
       <Group style={{ height: "100%", width: "100%" }}>
         {tileUi &&
           tileUi.flatMap((tile, index) => [

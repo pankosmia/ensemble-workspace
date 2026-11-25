@@ -10,6 +10,8 @@ export default function ZoneWithoutSeparator({
   layout,
   modified,
   setModified,
+  activeZoneId,
+  setActiveZoneId,
 }) {
   return (
     <Panel key={zoneID} id={String(zoneID)} minSize={10}>
@@ -22,6 +24,8 @@ export default function ZoneWithoutSeparator({
         layout={layout}
         setModified={setModified}
         modified={modified}
+        activeZoneId={activeZoneId}
+        setActiveZoneId={setActiveZoneId}
       />
     </Panel>
   );

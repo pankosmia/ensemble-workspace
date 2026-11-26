@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Typography, Box, Toolbar, Tooltip, useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
 export default function ToolbarResourceNotSelected({ metadata }) {
-  console.log("🚀 ~ ToolbarResourceNotSelected ~ metadata:", metadata);
   const theme = useTheme();
   const [isTruncated, setIsTruncated] = useState(false);
   const title = metadata?.name;

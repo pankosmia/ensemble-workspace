@@ -137,6 +137,7 @@ export default function ToolbarResourceSelected({ metadata, active }) {
             minHeight: "40px !important",
             backgroundColor: theme.palette.grey[100],
             px: 1,
+            borderBottom: `2px solid ${theme.palette.secondary.main}`,
           }}
         >
           {visibleGroups.map((group) => (

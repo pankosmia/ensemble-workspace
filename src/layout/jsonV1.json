@@ -10,14 +10,9 @@
       "id": 0,
       "tiles": [
         {
-          "id": 2,
-          "name": "Tile 2",
-          "src": "git.door43.org/Worldview/en_bsb"
-        },
-        {
-          "id": 3,
-          "name": "Tile 2",
-          "src": "_local_/_local_/fr_psle"
+          "id": 1,
+          "name": "Tile 1",
+          "src": "_local_/_local_/fr_juxta"
         }
       ]
     },
@@ -27,7 +22,12 @@
         {
           "id": 2,
           "name": "Tile 2",
-          "src": "_local_/_local_/fr_juxta"
+          "src": "git.door43.org/Worldview/en_bsb"
+        },
+        {
+          "id": 3,
+          "name": "Tile 2",
+          "src": "_local_/_local_/fr_psle"
         }
       ]
     },

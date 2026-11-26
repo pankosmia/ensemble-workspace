@@ -54,6 +54,10 @@
     "unsaved_changes": {
       "en": "Unsaved changes",
       "fr": "Modifications non enregistrées"
+    },
+    "internet_enable_error": {
+      "en": "Error enabling internet.",
+      "fr": "Erreur lors de l'activation d'internet."
     }
   }
 }

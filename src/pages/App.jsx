@@ -1,11 +1,11 @@
-import { currentProjectContext } from "pankosmia-rcl";
+import { currentProjectContext, i18nContext } from "pankosmia-rcl";
 import PanWorkspaceManager from "../layout/PanWorkspaceManager";
 import config from "../layout/jsonV1.json";
 import AdvancedAppBar from "../layout/Navigation/AdvancedAppBar";
 import { useContext, useState, useEffect } from "react";
 import { getJson, postEmpty } from "pankosmia-lib/http";
 import { enqueueSnackbar } from "notistack";
-
+import {} from "pankosmia-lib/i18n";
 import { doI18n } from "pankosmia-lib/i18n";
 import NavigationWrapper from "../layout/Navigation/NavigationWrapper";
 import { Box } from "@mui/system";
@@ -13,6 +13,7 @@ function App() {
   const [currentBurrito, setCurrentBurrito] = useState(null);
   const [modified, setModified] = useState(false);
   const { currentProjectRef } = useContext(currentProjectContext);
+  const { i18nRef } = useContext(i18nContext);
 
   useEffect(() => {
     async function getSummary() {

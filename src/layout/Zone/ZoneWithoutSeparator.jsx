@@ -14,7 +14,12 @@ export default function ZoneWithoutSeparator({
   setActiveZoneId,
 }) {
   return (
-    <Panel key={zoneID} id={String(zoneID)} minSize={10}>
+    <Panel
+      key={zoneID}
+      id={String(zoneID)}
+      minSize={10}
+      style={{ padding: "0 4px 4px" }}
+    >
       <PanWorkspaceZone
         zone={zone}
         summaries={summaries}

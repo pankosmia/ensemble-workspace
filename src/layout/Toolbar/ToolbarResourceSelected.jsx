@@ -56,12 +56,12 @@ function countVisibleGroups(groups, availableWidth) {
   return groups.length;
 }
 
-export default function ToolbarResourceSelected({ title, active }) {
+export default function ToolbarResourceSelected({ metadata, active }) {
   const theme = useTheme();
   const toolbarRef = useRef(null);
   const [unsavedChanges, setUnsavedChanges] = useState(true);
   const [overflowMenu, setOverflowMenu] = useState(false);
-
+  const title = metadata?.name;
   const groups = [
     {
       divider: false,

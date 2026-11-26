@@ -84,9 +84,20 @@ export default function PanWorkspaceZone({
                   onPointerDownCapture={() => setActiveTileId(tile.id)}
                 >
                   {activeZoneId === zoneID && activeTileId === tile.id ? (
-                    <ToolbarResourceSelected active title="Pain sur les eaux" />
+                    <ToolbarResourceSelected
+                      active
+                      metadata={{
+                        ...summaries[tile.src],
+                        local_path: tile.src,
+                      }}
+                    />
                   ) : (
-                    <ToolbarResourceNotSelected />
+                    <ToolbarResourceNotSelected
+                      metadata={{
+                        ...summaries[tile.src],
+                        local_path: tile.src,
+                      }}
+                    />
                   )}
                   <div style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
                     <PanWorkspaceTile

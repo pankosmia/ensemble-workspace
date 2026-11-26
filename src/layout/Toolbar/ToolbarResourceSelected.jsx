@@ -42,6 +42,8 @@ const overflow_witdh = 34;
 
 function countVisibleGroups(groups, availableWidth) {
   let usedWidth = 0;
+  const [isTruncated, setIsTruncated] = useState(false);
+
   for (let index = 0; index < groups.length; index++) {
     const group = groups[index];
     const isLastGroup = index === groups.length - 1;
@@ -125,7 +127,24 @@ export default function ToolbarResourceSelected({ metadata, active }) {
           justifyContent: "center",
         }}
       >
-        <Typography variant="caption">{title}</Typography>
+        <Typography
+          variant="caption"
+          sx={{
+            display: "block",
+            maxWidth: "100%",
+            textAlign: "center",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          onMouseEnter={(e) =>
+            setIsTruncated(
+              e.currentTarget.scrollWidth > e.currentTarget.clientWidth,
+            )
+          }
+        >
+          {title}
+        </Typography>
       </Toolbar>
       {active && (
         <Toolbar

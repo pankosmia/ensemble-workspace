@@ -92,7 +92,6 @@ export default function ToolbarResourceSelected({ metadata, active }) {
       nodes: [<AboutButton key="about" />],
     },
   ];
-
   const [visibleCount, setVisibleCount] = useState(groups.length);
 
   useLayoutEffect(() => {

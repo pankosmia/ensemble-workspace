@@ -56,8 +56,8 @@
       "fr": "Modifications non enregistrées"
     },
     "add_to_workspace": {
-      "en": "Add to workspace",
-      "fr": "Ajouter à l'espace de travail"
+      "en": "Add to zone",
+      "fr": "Ajouter à la zone"
     },
     "swap_zone": {
       "en": "Swap zone",
@@ -65,7 +65,7 @@
     },
     "view": {
       "en": "View",
-      "fr": "Affichage"
+      "fr": "Vue"
     },
     "view_columns": {
       "en": "Columns",

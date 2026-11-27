@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import PanWorkspaceZone from "./Zone/PanWorkspaceZone";
 import { Group, Panel } from "react-resizable-panels";
 import { Separator } from "react-resizable-panels";
 import { getJson } from "pankosmia-lib/http";

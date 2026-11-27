@@ -55,6 +55,34 @@
       "en": "Unsaved changes",
       "fr": "Modifications non enregistrées"
     },
+    "add_to_workspace": {
+      "en": "Add to workspace",
+      "fr": "Ajouter à l'espace de travail"
+    },
+    "swap_zone": {
+      "en": "Swap zone",
+      "fr": "Permuter la zone"
+    },
+    "view": {
+      "en": "View",
+      "fr": "Affichage"
+    },
+    "view_columns": {
+      "en": "Columns",
+      "fr": "Colonnes"
+    },
+    "view_rows": {
+      "en": "Rows",
+      "fr": "Lignes"
+    },
+    "view_tabs": {
+      "en": "Tabs",
+      "fr": "Onglets"
+    },
+    "close": {
+      "en": "Close",
+      "fr": "Fermer"
+    },
     "internet_enable_error": {
       "en": "Error enabling internet.",
       "fr": "Erreur lors de l'activation d'internet."

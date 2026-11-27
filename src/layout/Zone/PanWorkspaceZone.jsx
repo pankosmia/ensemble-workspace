@@ -12,7 +12,7 @@ import {
   currentProjectContext,
   productContext,
 } from "pankosmia-rcl";
-
+import MenuZone from "./MenuZone";
 export default function PanWorkspaceZone({
   zone,
   summaries,
@@ -63,6 +63,7 @@ export default function PanWorkspaceZone({
         width: "100%",
         overflow: "hidden",
         outlineOffset: -2,
+        position: "relative",
       }}
       onPointerDownCapture={() => setActiveZoneId(zoneID)}
     >
@@ -78,7 +79,10 @@ export default function PanWorkspaceZone({
               id={tile.id}
               style={{
                 background: "white",
-                borderRadius: `${index === 0 ? 4 : 0}px ${index === tileUi.length - 1 ? 4 : 0}px ${index === tileUi.length - 1 ? 4 : 0}px ${index === 0 ? 4 : 0}px`,
+                borderStartStartRadius: index === 0 ? 4 : 0,
+                borderEndStartRadius: index === 0 ? 4 : 0,
+                borderStartEndRadius: index === tileUi.length - 1 ? 4 : 0,
+                borderEndEndRadius: index === tileUi.length - 1 ? 4 : 0,
               }}
             >
               {currentProjectRef.current && (
@@ -107,7 +111,14 @@ export default function PanWorkspaceZone({
                       }}
                     />
                   )}
-                  <div style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
+                  <div
+                    style={{
+                      flex: 1,
+                      minHeight: 0,
+                      overflowY: "auto",
+                      marginBottom: index === tileUi.length - 1 ? 34 : 0,
+                    }}
+                  >
                     <PanWorkspaceTile
                       product={product}
                       setModified={setModified}
@@ -127,6 +138,7 @@ export default function PanWorkspaceZone({
             </Panel>,
           ])}
       </Group>
+      {currentProjectRef.current && <MenuZone />}
     </div>
   );
 }

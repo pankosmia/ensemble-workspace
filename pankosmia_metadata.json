@@ -15,6 +15,46 @@
       "en": "Edit content through this page.",
       "fr": "Éditer du contenu via cette page."
     },
+    "edit_button": {
+      "en": "Edit",
+      "fr": "Éditer"
+    },
+    "save_button": {
+      "en": "Save",
+      "fr": "Sauvegarder"
+    },
+    "export_button": {
+      "en": "Export as",
+      "fr": "Exporter au format"
+    },
+    "print_button": {
+      "en": "Print as PDF",
+      "fr": "Imprimer au format PDF"
+    },
+    "delete_button": {
+      "en": "Delete",
+      "fr": "Supprimer"
+    },
+    "move_button": {
+      "en": "Move to",
+      "fr": "Déplacer vers"
+    },
+    "about_button": {
+      "en": "Properties",
+      "fr": "Propriétés"
+    },
+    "version_manager_button": {
+      "en": "Version Manager",
+      "fr": "Gestionnaire de versions"
+    },
+    "overflow_button": {
+      "en": "More",
+      "fr": "Plus"
+    },
+    "unsaved_changes": {
+      "en": "Unsaved changes",
+      "fr": "Modifications non enregistrées"
+    },
     "internet_enable_error": {
       "en": "Error enabling internet.",
       "fr": "Erreur lors de l'activation d'internet."

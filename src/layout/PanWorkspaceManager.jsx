@@ -19,6 +19,7 @@ export default function PanWorkspaceManager({ setModified, modified }) {
   const [layoutZoneId, setLayoutZoneId] = useState(config.layout.zoneId);
   const [initLayout, setInitLayout] = useState(config.layout.init);
   const [modulo, setModulo] = useState(initLayout === "vertical" ? 1 : 0);
+  const [activeZoneId, setActiveZoneId] = useState(config.layout.editor);
 
   const [metadataSummaries, setMetadataSummaries] = useState(null);
 
@@ -228,6 +229,8 @@ export default function PanWorkspaceManager({ setModified, modified }) {
                               layout={config.layout}
                               orientation={layoutOrder[idArr]}
                               removeZone={layoutOrder[idArr]}
+                              activeZoneId={activeZoneId}
+                              setActiveZoneId={setActiveZoneId}
                               updateZone={updateZone}
                               setModified={setModified}
                               modified={modified}
@@ -241,6 +244,8 @@ export default function PanWorkspaceManager({ setModified, modified }) {
                               zoneID={zones[idZ].id}
                               layout={config.layout}
                               removeZone={layoutOrder[idArr]}
+                              activeZoneId={activeZoneId}
+                              setActiveZoneId={setActiveZoneId}
                               updateZone={updateZone}
                               setModified={setModified}
                               modified={modified}
@@ -261,6 +266,8 @@ export default function PanWorkspaceManager({ setModified, modified }) {
                     zoneID={zones[arrayIds[0]].id}
                     orientation={initLayout}
                     layout={config.layout}
+                    activeZoneId={activeZoneId}
+                    setActiveZoneId={setActiveZoneId}
                     removeZone={removeZone}
                     updateZone={updateZone}
                     setModified={setModified}
@@ -275,6 +282,8 @@ export default function PanWorkspaceManager({ setModified, modified }) {
                     layout={config.layout}
                     zoneID={zones[arrayIds[0]].id}
                     removeZone={removeZone}
+                    activeZoneId={activeZoneId}
+                    setActiveZoneId={setActiveZoneId}
                     updateZone={updateZone}
                     setModified={setModified}
                     modified={modified}

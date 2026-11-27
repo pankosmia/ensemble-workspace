@@ -12,6 +12,8 @@ export default function ZoneWithSeparator({
   summaries,
   setModified,
   modified,
+  activeZoneId,
+  setActiveZoneId,
 }) {
   return (
     <>
@@ -37,6 +39,8 @@ export default function ZoneWithSeparator({
           layout={layout}
           setModified={setModified}
           modified={modified}
+          activeZoneId={activeZoneId}
+          setActiveZoneId={setActiveZoneId}
         />
       </Panel>
     </>

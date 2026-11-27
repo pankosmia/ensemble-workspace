@@ -3,6 +3,8 @@ import PanWorkspaceTile from "../Tile/PanWorkspaceTile";
 import { Separator } from "react-resizable-panels";
 import { Panel } from "react-resizable-panels";
 import { useEffect, useState, useContext } from "react";
+import ToolbarResourceNotSelected from "../Toolbar/ToolbarResourceNotSelected";
+import ToolbarResourceSelected from "../Toolbar/ToolbarResourceSelected";
 import {
   bcvContext,
   debugContext,
@@ -19,6 +21,8 @@ export default function PanWorkspaceZone({
   onRemoveZone,
   setModified,
   modified,
+  activeZoneId,
+  setActiveZoneId,
 }) {
   const { bcvRef } = useContext(bcvContext);
   const { debugRef } = useContext(debugContext);
@@ -26,11 +30,8 @@ export default function PanWorkspaceZone({
   const { currentProjectRef } = useContext(currentProjectContext);
   const { product } = useContext(productContext);
 
-  const metadata = {
-    ...summaries[zone.tiles[0].src],
-    local_path: zone.tiles[0].src,
-  };
   const [tileUi, setTileUi] = useState(null);
+  const [activeTileId, setActiveTileId] = useState(zone.tiles[0].id);
 
   useEffect(() => {
     async function test() {
@@ -56,19 +57,15 @@ export default function PanWorkspaceZone({
   }
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      {/* <div
-        style={{
-          gap: "8px",
-          display: "flex",
-          margin: "8px",
-          alignItems: "center",
-        }}
-      >
-        Zone {id}
-        <button onClick={() => onRemoveZone(id)}>✕ Zone</button>
-        <button onClick={() => addTile()}>+ Tile</button>
-      </div> */}
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        overflow: "hidden",
+        outlineOffset: -2,
+      }}
+      onPointerDownCapture={() => setActiveZoneId(zoneID)}
+    >
       <Group style={{ height: "100%", width: "100%" }}>
         {tileUi &&
           tileUi.flatMap((tile, index) => [
@@ -77,17 +74,46 @@ export default function PanWorkspaceZone({
             ),
             <Panel minSize={30} key={tile.id} id={tile.id}>
               {currentProjectRef.current && (
-                <div style={{ height: "100%", width: "100%" }}>
-                  <PanWorkspaceTile
-                    product={product}
-                    setModified={setModified}
-                    metadata={metadata}
-                    bcvRef={bcvRef}
-                    debugRef={debugRef}
-                    i18nRef={i18nRef}
-                    currentProjectRef={currentProjectRef}
-                    isEditor={layout.editor === zoneID}
-                  />
+                <div
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                  onPointerDownCapture={() => setActiveTileId(tile.id)}
+                >
+                  {activeZoneId === zoneID && activeTileId === tile.id ? (
+                    <ToolbarResourceSelected
+                      active
+                      metadata={{
+                        ...summaries[tile.src],
+                        local_path: tile.src,
+                      }}
+                    />
+                  ) : (
+                    <ToolbarResourceNotSelected
+                      metadata={{
+                        ...summaries[tile.src],
+                        local_path: tile.src,
+                      }}
+                    />
+                  )}
+                  <div style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
+                    <PanWorkspaceTile
+                      product={product}
+                      setModified={setModified}
+                      metadata={{
+                        ...summaries[tile.src],
+                        local_path: tile.src,
+                      }}
+                      bcvRef={bcvRef}
+                      debugRef={debugRef}
+                      i18nRef={i18nRef}
+                      currentProjectRef={currentProjectRef}
+                      isEditor={layout.editor === zoneID}
+                    />
+                  </div>
                 </div>
               )}
             </Panel>,

@@ -14,7 +14,12 @@ export default function ExportButton() {
           borderRadius: "4px",
         }}
       >
-        <SvgIcon>
+        <SvgIcon
+          sx={{
+            transform: (theme) =>
+              theme.direction === "rtl" ? "scaleX(-1)" : "none",
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

@@ -1,7 +1,8 @@
 import { Separator } from "react-resizable-panels";
 import { Panel } from "react-resizable-panels";
 import PanWorkspaceZone from "./PanWorkspaceZone";
-
+import { useTheme } from "@mui/material";
+import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 export default function ZoneWithSeparator({
   zone,
   zoneID,
@@ -15,21 +16,35 @@ export default function ZoneWithSeparator({
   activeZoneId,
   setActiveZoneId,
 }) {
+  const theme = useTheme();
   return (
     <>
       {orientation === "vertical" ? (
         <Separator
           key={`sep-${zoneID}`}
-          style={{ height: 4, background: "green" }}
-        />
+          className="workspace-separator"
+          style={{ background: theme.palette.primary.light }}
+        >
+          <MoreHorizOutlinedIcon
+            fontSize="small"
+            sx={{ color: theme.palette.primary.contrastText }}
+          />
+        </Separator>
       ) : (
-        <Separator
-          key={`sep-${zoneID}`}
-          style={{ width: 4, background: "green" }}
-        />
+        <Separator key={`sep-${zoneID}`} className="workspace-separator">
+          <MoreHorizOutlinedIcon
+            fontSize="small"
+            sx={{ color: theme.palette.primary.contrastText }}
+          />
+        </Separator>
       )}
 
-      <Panel key={zoneID} id={String(zoneID)} minSize={10}>
+      <Panel
+        key={zoneID}
+        id={String(zoneID)}
+        minSize={10}
+        style={{ padding: "4px" }}
+      >
         <PanWorkspaceZone
           zone={zone}
           zoneID={zoneID}

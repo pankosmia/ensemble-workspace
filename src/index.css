@@ -13,3 +13,34 @@ code {
   font-family:
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+.workspace-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.workspace-separator[aria-orientation="vertical"] {
+  width: 7px;
+  cursor: col-resize;
+}
+
+.workspace-separator[aria-orientation="horizontal"] {
+  height: 7px;
+  margin: 0 4px;
+  cursor: row-resize;
+}
+
+.tiles-separator {
+  background: #e0e0e0; /* gray 300 MUI */
+}
+
+.tiles-separator[aria-orientation="vertical"] {
+  width: 4px;
+  cursor: col-resize;
+}
+
+.tiles-separator[aria-orientation="horizontal"] {
+  height: 4px;
+}

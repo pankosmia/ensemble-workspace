@@ -1,7 +1,14 @@
 import EditButton from "./Icons/EditButton";
 import ArrowMenu from "./Icons/ArrowMenu";
 import { SaveButton, SaveButtonError } from "./Icons/SaveButton";
-import { Box, Divider, Toolbar, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Toolbar,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import PrintButton from "./Icons/PrintButton";
 import ExportButton from "./Icons/ExportButton";
 import VersionManagerButton from "./Icons/VersionManagerButton";
@@ -62,6 +69,7 @@ export default function ToolbarResourceSelected({ metadata, active }) {
   const [unsavedChanges, setUnsavedChanges] = useState(true);
   const [overflowMenu, setOverflowMenu] = useState(false);
   const title = metadata?.name;
+  const [isTruncated, setIsTruncated] = useState(false);
   const groups = [
     {
       divider: false,
@@ -125,7 +133,26 @@ export default function ToolbarResourceSelected({ metadata, active }) {
           justifyContent: "center",
         }}
       >
-        <Typography variant="caption">{title}</Typography>
+        <Tooltip title={isTruncated && title}>
+          <Typography
+            variant="caption"
+            sx={{
+              display: "block",
+              maxWidth: "100%",
+              textAlign: "center",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            onMouseEnter={(e) =>
+              setIsTruncated(
+                e.currentTarget.scrollWidth > e.currentTarget.clientWidth,
+              )
+            }
+          >
+            {title}
+          </Typography>
+        </Tooltip>
       </Toolbar>
       {active && (
         <Toolbar

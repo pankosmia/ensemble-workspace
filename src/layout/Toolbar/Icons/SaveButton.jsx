@@ -17,8 +17,21 @@ function SaveButton({ unsavedChanges }) {
           borderRadius: "4px",
         }}
       >
-        <Badge invisible={!unsavedChanges} color="error" variant="dot">
-          <SaveOutlinedIcon />
+        <Badge
+          invisible={!unsavedChanges}
+          color="error"
+          variant="dot"
+          sx={{
+            transform: (theme) =>
+              theme.direction === "rtl" ? "scaleX(-1)" : "none",
+          }}
+        >
+          <SaveOutlinedIcon
+            sx={{
+              transform: (theme) =>
+                theme.direction === "rtl" ? "scaleX(-1)" : "none",
+            }}
+          />
         </Badge>
       </IconButton>
     </Tooltip>

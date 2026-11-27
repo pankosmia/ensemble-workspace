@@ -15,7 +15,12 @@ export default function MoveButton() {
           borderRadius: "4px",
         }}
       >
-        <DriveFileMoveOutlinedIcon />
+        <DriveFileMoveOutlinedIcon
+          sx={{
+            transform: (theme) =>
+              theme.direction === "rtl" ? "scaleX(-1)" : "none",
+          }}
+        />
       </IconButton>
     </Tooltip>
   );

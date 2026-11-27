@@ -70,9 +70,17 @@ export default function PanWorkspaceZone({
         {tileUi &&
           tileUi.flatMap((tile, index) => [
             index > 0 && (
-              <Separator key={`sep-${tile.id}`} style={{ width: 4 }} />
+              <Separator key={`sep-${tile.id}`} className="tiles-separator" />
             ),
-            <Panel minSize={30} key={tile.id} id={tile.id}>
+            <Panel
+              minSize={30}
+              key={tile.id}
+              id={tile.id}
+              style={{
+                background: "white",
+                borderRadius: `${index === 0 ? 4 : 0}px ${index === tileUi.length - 1 ? 4 : 0}px ${index === tileUi.length - 1 ? 4 : 0}px ${index === 0 ? 4 : 0}px`,
+              }}
+            >
               {currentProjectRef.current && (
                 <div
                   style={{

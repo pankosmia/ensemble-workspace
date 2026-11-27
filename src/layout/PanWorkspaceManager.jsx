@@ -6,7 +6,9 @@ import { getJson } from "pankosmia-lib/http";
 import ZoneWithoutSeparator from "./Zone/ZoneWithoutSeparator";
 import ZoneWithSeparator from "./Zone/ZoneWithSeparator";
 import config from "./jsonV1.json";
-
+import { useTheme } from "@mui/material";
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+import { style } from "@mui/system";
 const reverseOrientation = (current) => {
   if (current === "horizontal") {
     return "vertical";
@@ -14,6 +16,7 @@ const reverseOrientation = (current) => {
   return "horizontal";
 };
 export default function PanWorkspaceManager({ setModified, modified }) {
+  const theme = useTheme();
   const [zones, setZones] = useState(config.zones);
   const [layoutOrder, setLayoutOrder] = useState(config.layout.order);
   const [layoutZoneId, setLayoutZoneId] = useState(config.layout.zoneId);
@@ -189,7 +192,13 @@ export default function PanWorkspaceManager({ setModified, modified }) {
   }, []);
   return (
     metadataSummaries && (
-      <div style={{ height: "100%", width: "100%" }}>
+      <div
+        style={{
+          height: "100%",
+          width: "100%",
+          background: theme.palette.primary.main,
+        }}
+      >
         <Group
           style={{ height: "100%", width: "100%" }}
           orientation={initLayout}
@@ -202,13 +211,20 @@ export default function PanWorkspaceManager({ setModified, modified }) {
                   initLayout === "vertical" ? (
                     <Separator
                       key={`sep-${idArr}`}
-                      style={{ height: 4, background: "green" }}
+                      className="workspace-separator"
+                      style={{ background: theme.palette.primary.light }}
                     />
                   ) : (
                     <Separator
                       key={`sep-${idArr}`}
-                      style={{ width: 4, background: "green" }}
-                    />
+                      className="workspace-separator"
+                      style={{ background: theme.palette.primary.light }}
+                    >
+                      <MoreVertOutlinedIcon
+                        fontSize="small"
+                        sx={{ color: theme.palette.primary.contrastText }}
+                      />
+                    </Separator>
                   );
               }
               return (

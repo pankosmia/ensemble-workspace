@@ -115,6 +115,7 @@ export default function PanWorkspaceZone({
                       flex: 1,
                       minHeight: 0,
                       overflowY: "auto",
+                      scrollbarWidth: "thin",
                       marginBottom: index === tileUi.length - 1 ? 34 : 0,
                     }}
                   >

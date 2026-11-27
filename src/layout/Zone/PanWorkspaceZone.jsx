@@ -29,7 +29,6 @@ export default function PanWorkspaceZone({
   const { i18nRef } = useContext(i18nContext);
   const { currentProjectRef } = useContext(currentProjectContext);
   const { product } = useContext(productContext);
-
   const [tileUi, setTileUi] = useState(null);
   const [activeTileId, setActiveTileId] = useState(zone.tiles[0].id);
 
@@ -138,7 +137,7 @@ export default function PanWorkspaceZone({
             </Panel>,
           ])}
       </Group>
-      {currentProjectRef.current && <MenuZone />}
+      {currentProjectRef.current && <MenuZone tiles={tileUi} />}
     </div>
   );
 }

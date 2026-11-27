@@ -2,16 +2,13 @@ import {
   Box,
   IconButton,
   MenuItem,
-  Popover,
-  Stack,
-  Typography,
   ListItemIcon,
   ListItemText,
-  Menu,
   Divider,
+  ListSubheader,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { useState, useContext } from "react";
-import IconSetting from "@mui/icons-material/Settings";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext, PanMenuWrapper } from "pankosmia-rcl";
@@ -20,15 +17,20 @@ import RadioButtonUnchecked from "@mui/icons-material/RadioButtonUnchecked";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import MoveDownOutlinedIcon from "@mui/icons-material/MoveDownOutlined";
-export default function MenuZone() {
+
+export default function MenuZone({ tiles }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const { i18nRef } = useContext(i18nContext);
-  const [selected, setSelected] = useState("name");
+  const [selected, setSelected] = useState("Columns");
   const option_view = [
     { value: "Columns", labelKey: "pages:ensemble-workspace:view_columns" },
     { value: "Rows", labelKey: "pages:ensemble-workspace:view_rows" },
     { value: "Tabs", labelKey: "pages:ensemble-workspace:view_tabs" },
   ];
+  const StyledListHeader = styled(ListSubheader)({
+    backgroundImage: "var(--Paper-overlay)",
+  });
+
   return (
     <Box
       sx={{
@@ -75,15 +77,16 @@ export default function MenuZone() {
           </ListItemText>
         </MenuItem>
         <Divider />
-        <Typography variant="subtitle2" sx={{ padding: "8px 16px" }}>
+        <StyledListHeader sx={{ paddingLeft: "52px" }}>
           {doI18n("pages:ensemble-workspace:view", i18nRef.current)}
-        </Typography>
+        </StyledListHeader>
         {option_view.map((option) => (
           <MenuItem
             key={option.value}
             role="menuitemradio"
             selected={selected === option.value}
             onClick={() => setSelected(option.value)}
+            disabled={tiles?.length < 2}
           >
             <ListItemIcon>
               {selected === option.value ? (
